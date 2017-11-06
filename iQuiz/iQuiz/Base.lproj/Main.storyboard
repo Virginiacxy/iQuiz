@@ -65,7 +65,7 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iQuiz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLc-Wy-Q4w">
-                                <rect key="frame" x="165.5" y="10" width="44.5" height="64"/>
+                                <rect key="frame" x="165.5" y="30" width="44.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -77,7 +77,6 @@
                             <constraint firstItem="u0G-3K-efh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CoS-mw-7pT"/>
                             <constraint firstItem="u0G-3K-efh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OwO-T2-BgK"/>
                             <constraint firstItem="u0G-3K-efh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="P7u-Oa-W8i"/>
-                            <constraint firstItem="RLc-Wy-Q4w" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="Rwj-Oa-tb2"/>
                             <constraint firstItem="j4L-cD-2mp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="S3i-fx-qAZ"/>
                             <constraint firstItem="RLc-Wy-Q4w" firstAttribute="centerY" secondItem="j4L-cD-2mp" secondAttribute="centerY" id="Uu3-MM-OeJ"/>
                             <constraint firstItem="u0G-3K-efh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VnQ-XW-n3k"/>

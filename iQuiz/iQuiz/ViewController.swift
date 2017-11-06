@@ -33,8 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
         cell.textLabel?.text = subjects[indexPath.row]
         cell.detailTextLabel?.text = desc[indexPath.row]
         cell.imageView?.image = UIImage(named: images[indexPath.row])
@@ -55,7 +54,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
