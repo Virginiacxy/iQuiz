@@ -24,10 +24,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 1
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("You selected cell \(indexPath.row)!")
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.subjects.count
     }
@@ -39,16 +35,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.imageView?.image = UIImage(named: images[indexPath.row])
         
         return cell
-//        let cell: UITableViewCell
-//        if let newCell = tableView.dequeueReusableCell(withIdentifier: "cell") {
-//            cell = newCell
-//        } else {
-//            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-//        }
-////        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-////        if cell == nil {
-////            cell = UITableViewCell(style: UITableViewCellStyle.value2, reuseIdentifier: "cell")
-////        }
     }
     
     override func viewDidLoad() {
@@ -63,6 +49,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
 
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let rowClicked = tableView.indexPathForSelectedRow?.row
+        switch segue.identifier! {
+        case "QuestionSegue":
+            let destination = segue.destination as! QuestionViewController
+            destination.index = rowClicked!
+        default: NSLog("Unkown segue identifier -- " + segue.identifier!)
+        }
+    }
 }
 
