@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let subjects: [String] = ["Mathematics", "Marvel Super Heroes", "Science"]
-    let desc: [String] = ["1+1", "Marvel questions", "explore the world"]
+    let desc: [String] = ["1 + 1", "Marvel questions", "explore the world"]
     let images: [String] = ["1", "2", "3"]
     @IBOutlet weak var tableView: UITableView!
     

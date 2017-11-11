@@ -37,14 +37,16 @@ class FinishViewController: UIViewController {
     }
     
     @IBAction func changeToNext(_ sender: Any) {
-        questionBuilder()
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromRight
-        view.window!.layer.add(transition, forKey: kCATransition)
-        questionVC.index = self.index + 1
-        present(questionVC, animated: false, completion: nil)
+        if index != 2 {
+            questionBuilder()
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            view.window!.layer.add(transition, forKey: kCATransition)
+            questionVC.index = self.index + 1
+            present(questionVC, animated: false, completion: nil)
+        }
     }
     
     fileprivate func questionBuilder() {
