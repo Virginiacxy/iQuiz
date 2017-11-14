@@ -11,11 +11,8 @@ import UIKit
 class QuestionViewController: UIViewController {
     fileprivate var answerVC: AnswerViewController!
     @IBOutlet weak var questionTitle: UILabel!
-    @IBOutlet weak var answer4: UIButton!
-    @IBOutlet weak var answer3: UIButton!
-    @IBOutlet weak var answer2: UIButton!
-    @IBOutlet weak var answer1: UIButton!
     @IBOutlet weak var question: UILabel!
+    @IBOutlet var answers: [UIButton]?
     var index: Int = 0
     var currentNo: Int = 1
     var correctAll: Int = 0
@@ -31,19 +28,19 @@ class QuestionViewController: UIViewController {
     var scienceQuestions: [String] = ["Brass gets discoloured in air because of the presence of which of the following gases in air?", "Which of the following is used in pencils?", "The element common to all acids is"]
     var scienceAnswers: [Int] = [2, 1, 1]
     
-    @IBAction func answer1Clicked(_ sender: UIButton) {
-        chooseResult = returnResult(selected: 1)
+    @IBAction func answerClicked(_ sender: UIButton) {
+        for i in 0..<answers!.count {
+            if answers![i].titleLabel!.text != sender.titleLabel!.text {
+                answers![i].backgroundColor = .white
+                answers![i].setTitleColor(self.view.tintColor, for: .normal)
+            } else {
+                answers![i].backgroundColor = self.view.tintColor
+                answers![i].setTitleColor(.white, for: .normal)
+                chooseResult = returnResult(selected: i + 1)
+            }
+        }
     }
-    @IBAction func answer2Clicked(_ sender: UIButton) {
-        chooseResult = returnResult(selected: 2)
-    }
-    @IBAction func answer3Clicked(_ sender: UIButton) {
-        chooseResult = returnResult(selected: 3)
-    }
-    @IBAction func answer4Clicked(_ sender: UIButton) {
-        chooseResult = returnResult(selected: 4)
-    }
-    
+
     fileprivate func answerBuilder() {
         if answerVC == nil {
             answerVC =
@@ -52,7 +49,6 @@ class QuestionViewController: UIViewController {
                 as! AnswerViewController
         }
     }
-    
 
     private func returnResult(selected: Int) -> Bool {
         if index == 0 {
@@ -65,35 +61,33 @@ class QuestionViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        answer1.layer.cornerRadius = 10
-        answer1.clipsToBounds = true
-        answer2.layer.cornerRadius = 10
-        answer2.clipsToBounds = true
-        answer3.layer.cornerRadius = 10
-        answer3.clipsToBounds = true
-        answer4.layer.cornerRadius = 10
-        answer4.clipsToBounds = true
-        
+        for answer in answers! {
+            answer.layer.cornerRadius = 10
+            answer.clipsToBounds = true
+            answer.layer.borderColor = self.view.tintColor.cgColor
+            answer.layer.borderWidth = 1
+        }
+
         if index == 0 {
             questionTitle.text = "Mathematics (\(currentNo))"
             question.text = mathQuestions[currentNo - 1]
             if currentNo == 1 {
-                answer1.setTitle("3.9", for: .normal)
-                answer2.setTitle("3.86", for: .normal)
-                answer3.setTitle("4", for: .normal)
-                answer4.setTitle("3.96", for: .normal)
+                answers![0].setTitle("3.9", for: .normal)
+                answers![1].setTitle("3.86", for: .normal)
+                answers![2].setTitle("4", for: .normal)
+                answers![3].setTitle("3.96", for: .normal)
                 correctAnswerStr = "3.9"
             } else if currentNo == 2 {
-                answer1.setTitle("y - z", for: .normal)
-                answer2.setTitle("z/y + 1", for: .normal)
-                answer3.setTitle("y(z - 1)", for: .normal)
-                answer4.setTitle("z(y - 1)", for: .normal)
+                answers![0].setTitle("y - z", for: .normal)
+                answers![1].setTitle("z/y + 1", for: .normal)
+                answers![2].setTitle("y(z - 1)", for: .normal)
+                answers![3].setTitle("z(y - 1)", for: .normal)
                 correctAnswerStr = "z/y + 1"
             } else if currentNo == 3 {
-                answer1.setTitle("50°", for: .normal)
-                answer2.setTitle("55°", for: .normal)
-                answer3.setTitle("60°", for: .normal)
-                answer4.setTitle("80°", for: .normal)
+                answers![0].setTitle("50°", for: .normal)
+                answers![1].setTitle("55°", for: .normal)
+                answers![2].setTitle("60°", for: .normal)
+                answers![3].setTitle("80°", for: .normal)
                 correctAnswerStr = "80°"
             }
         }
@@ -101,22 +95,22 @@ class QuestionViewController: UIViewController {
             question.text = marvelQuestions[currentNo - 1]
             questionTitle.text = "Marvel Super Heroes (\(currentNo))"
             if currentNo == 1 {
-                answer1.setTitle("TITANIUM ALLOY", for: .normal)
-                answer2.setTitle("MITHRIL", for: .normal)
-                answer3.setTitle("ADAMANTIUM", for: .normal)
-                answer4.setTitle("VIBRANIUM", for: .normal)
+                answers![0].setTitle("TITANIUM ALLOY", for: .normal)
+                answers![1].setTitle("MITHRIL", for: .normal)
+                answers![2].setTitle("ADAMANTIUM", for: .normal)
+                answers![3].setTitle("VIBRANIUM", for: .normal)
                 correctAnswerStr = "VIBRANIUM"
             } else if currentNo == 2 {
-                answer1.setTitle("TONY STARK", for: .normal)
-                answer2.setTitle("NICK FURY", for: .normal)
-                answer3.setTitle("AGENT COULSON", for: .normal)
-                answer4.setTitle("JUSTIN HAMMER", for: .normal)
+                answers![0].setTitle("TONY STARK", for: .normal)
+                answers![1].setTitle("NICK FURY", for: .normal)
+                answers![2].setTitle("AGENT COULSON", for: .normal)
+                answers![3].setTitle("JUSTIN HAMMER", for: .normal)
                 correctAnswerStr = "AGENT COULSON"
             } else if currentNo == 3 {
-                answer1.setTitle("20", for: .normal)
-                answer2.setTitle("6", for: .normal)
-                answer3.setTitle("2", for: .normal)
-                answer4.setTitle("12", for: .normal)
+                answers![0].setTitle("20", for: .normal)
+                answers![1].setTitle("6", for: .normal)
+                answers![2].setTitle("2", for: .normal)
+                answers![3].setTitle("12", for: .normal)
                 correctAnswerStr = "6"
             }
         }
@@ -124,22 +118,22 @@ class QuestionViewController: UIViewController {
             question.text = scienceQuestions[currentNo - 1]
             questionTitle.text = "Science (\(currentNo))"
             if currentNo == 1 {
-                answer1.setTitle("Oxygen", for: .normal)
-                answer2.setTitle("Hydrogen sulphide", for: .normal)
-                answer3.setTitle("Carbon dioxide", for: .normal)
-                answer4.setTitle("Nitrogen", for: .normal)
+                answers![0].setTitle("Oxygen", for: .normal)
+                answers![1].setTitle("Hydrogen sulphide", for: .normal)
+                answers![2].setTitle("Carbon dioxide", for: .normal)
+                answers![3].setTitle("Nitrogen", for: .normal)
                 correctAnswerStr = "Hydrogen sulphide"
             } else if currentNo == 2 {
-                answer1.setTitle("Graphite", for: .normal)
-                answer2.setTitle("Silicon", for: .normal)
-                answer3.setTitle("Charcoal", for: .normal)
-                answer4.setTitle("Phosphorous", for: .normal)
+                answers![0].setTitle("Graphite", for: .normal)
+                answers![1].setTitle("Silicon", for: .normal)
+                answers![2].setTitle("Charcoal", for: .normal)
+                answers![3].setTitle("Phosphorous", for: .normal)
                 correctAnswerStr = "Graphite"
             } else if currentNo == 3 {
-                answer1.setTitle("hydrogen", for: .normal)
-                answer2.setTitle("carbon", for: .normal)
-                answer3.setTitle("sulphur", for: .normal)
-                answer4.setTitle("oxygen", for: .normal)
+                answers![0].setTitle("hydrogen", for: .normal)
+                answers![1].setTitle("carbon", for: .normal)
+                answers![2].setTitle("sulphur", for: .normal)
+                answers![3].setTitle("oxygen", for: .normal)
                 correctAnswerStr = "hydrogen"
             }
         }

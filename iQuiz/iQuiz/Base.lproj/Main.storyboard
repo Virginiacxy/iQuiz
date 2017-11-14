@@ -147,58 +147,46 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-1P-khK">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" title="Button"/>
                                         <variation key="heightClass=compact">
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         </variation>
                                         <connections>
-                                            <action selector="answer1Clicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="EOh-Ys-7wT"/>
+                                            <action selector="answerClicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="TPE-TP-JHX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5x-F3-JaM">
                                         <rect key="frame" x="0.0" y="55" width="343" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" title="Button"/>
                                         <variation key="heightClass=compact">
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         </variation>
                                         <connections>
-                                            <action selector="answer2Clicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="67i-tg-WJQ"/>
+                                            <action selector="answerClicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="reX-f1-Yu8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDu-MA-qLF">
                                         <rect key="frame" x="0.0" y="110" width="343" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" title="Button"/>
                                         <variation key="heightClass=compact">
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         </variation>
                                         <connections>
-                                            <action selector="answer3Clicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="vqw-PN-dgo"/>
+                                            <action selector="answerClicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="zYz-9o-K0j"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mSs-TF-MDF">
                                         <rect key="frame" x="0.0" y="165" width="343" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" title="Button"/>
                                         <variation key="heightClass=compact">
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         </variation>
                                         <connections>
-                                            <action selector="answer4Clicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="Y8E-aa-D2o"/>
+                                            <action selector="answerClicked:" destination="sQT-fZ-37c" eventType="touchUpInside" id="U8U-2D-9Xc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -232,12 +220,12 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="answer1" destination="cCg-1P-khK" id="0Lc-J6-g9K"/>
-                        <outlet property="answer2" destination="A5x-F3-JaM" id="4wz-I6-lvh"/>
-                        <outlet property="answer3" destination="RDu-MA-qLF" id="BAT-fT-3aM"/>
-                        <outlet property="answer4" destination="mSs-TF-MDF" id="ec8-W1-vbR"/>
                         <outlet property="question" destination="hvN-zv-Zzs" id="lMc-d5-rSy"/>
                         <outlet property="questionTitle" destination="bKy-zA-OwY" id="CDS-HC-LVs"/>
+                        <outletCollection property="answers" destination="cCg-1P-khK" collectionClass="NSMutableArray" id="5RW-2O-o1O"/>
+                        <outletCollection property="answers" destination="A5x-F3-JaM" collectionClass="NSMutableArray" id="Q0O-0s-LQS"/>
+                        <outletCollection property="answers" destination="RDu-MA-qLF" collectionClass="NSMutableArray" id="jor-Ya-TWY"/>
+                        <outletCollection property="answers" destination="mSs-TF-MDF" collectionClass="NSMutableArray" id="0ho-64-y8j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFH-hQ-Dr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
