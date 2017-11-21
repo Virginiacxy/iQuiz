@@ -11,6 +11,7 @@ import UIKit
 class AnswerViewController: UIViewController {
     fileprivate var questionVC: QuestionViewController!
     fileprivate var finishVC: FinishViewController!
+    fileprivate var mainVC: ViewController!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var currQuestion: UILabel!
     @IBOutlet weak var correctAnswer: UILabel!
@@ -21,14 +22,38 @@ class AnswerViewController: UIViewController {
     var index: Int = 0
     var currentNo: Int = 1
     var questionStr: String = ""
+    var categories: [String] = []
+    var questions = [String: [[[String]]]]()
+    var answers = [String: [Int]]()
+    var descriptions: [String] = []
+    var url: String = ""
+    var score: [String] = []
+    var images: [String] = []
+
+    fileprivate func mainBuilder() {
+        if mainVC == nil {
+            mainVC =
+                storyboard?
+                    .instantiateViewController(withIdentifier: "mainVC")
+                as! ViewController
+        }
+    }
     
     @IBAction func backToList(_ sender: Any) {
+        mainBuilder()
         let transition = CATransition()
         transition.duration = 0.5
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromLeft
         view.window!.layer.add(transition, forKey: kCATransition)
-        present((storyboard?.instantiateViewController(withIdentifier: "mainVC"))!, animated: false, completion: nil)
+        mainVC.answers = self.answers
+        mainVC.categories = self.categories
+        mainVC.questions = self.questions
+        mainVC.descriptions = self.descriptions
+        mainVC.url = self.url
+        mainVC.score = self.score
+        mainVC.images = self.images
+        present(mainVC, animated: false, completion: nil)
     }
     
     @IBAction func next(_ sender: Any) {
@@ -37,16 +62,30 @@ class AnswerViewController: UIViewController {
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight
         view.window!.layer.add(transition, forKey: kCATransition)
-        if (currentNo < 3) {
+        if (currentNo < questions[categories[index]]!.count) {
             questionBuilder()
             questionVC.currentNo = self.currentNo + 1
             questionVC.correctAll = self.correctAll
             questionVC.index = self.index
+            questionVC.answers = self.answers
+            questionVC.questions = self.questions
+            questionVC.categories = self.categories
+            questionVC.descriptions = self.descriptions
+            questionVC.url = self.url
+            questionVC.score = self.score
+            questionVC.images = self.images
             present(questionVC, animated: false, completion: nil)
         } else {
             finishBuilder()
             finishVC.correctAll = self.correctAll
             finishVC.index = self.index
+            finishVC.answers = self.answers
+            finishVC.categories = self.categories
+            finishVC.questions = self.questions
+            finishVC.descriptions = self.descriptions
+            finishVC.url = self.url
+            finishVC.score = self.score
+            finishVC.images = self.images
             present(finishVC, animated: false, completion: nil)
         }
     }

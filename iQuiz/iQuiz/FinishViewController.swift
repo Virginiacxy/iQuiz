@@ -10,23 +10,38 @@ import UIKit
 
 class FinishViewController: UIViewController {
     fileprivate var questionVC: QuestionViewController!
+    fileprivate var mainVC: ViewController!
     @IBOutlet weak var descriptive: UILabel!
-    @IBOutlet weak var score: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var nextBtn: UIButton!
+    var categories: [String] = []
+    var questions = [String: [[[String]]]]()
+    var answers = [String: [Int]]()
     var correctAll: Int = 0
     var index: Int = 0
+    var descriptions: [String] = []
+    var url: String = ""
+    var questionNum = 0
+    var score: [String] = []
+    var images: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if index == 2 {
+        questionNum = questions[categories[index]]!.count
+        if index == categories.count - 1 {
             nextBtn.isHidden = true
+            self.view.gestureRecognizers?.popLast()
         }
-        score.text = "Score: \(correctAll) / 3"
-        if correctAll == 3 {
+        scoreLabel.text = "Score: \(correctAll) / \(questionNum)"
+        if correctAll == questionNum {
             descriptive.text = "Perfect!"
-        } else if correctAll == 2 {
-            descriptive.text = "Almost!"
-        } else {
+            images[index] = "perfect"
+        } else if correctAll == 0 {
             descriptive.text = "Maybe next time!"
+            images[index] = "bad"
+        } else {
+            descriptive.text = "Almost!"
+            images[index] = "medium"
         }
         // Do any additional setup after loading the view.
     }
@@ -37,16 +52,22 @@ class FinishViewController: UIViewController {
     }
     
     @IBAction func changeToNext(_ sender: Any) {
-        if index != 2 {
-            questionBuilder()
-            let transition = CATransition()
-            transition.duration = 0.5
-            transition.type = kCATransitionPush
-            transition.subtype = kCATransitionFromRight
-            view.window!.layer.add(transition, forKey: kCATransition)
-            questionVC.index = self.index + 1
-            present(questionVC, animated: false, completion: nil)
-        }
+        questionBuilder()
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        view.window!.layer.add(transition, forKey: kCATransition)
+        questionVC.index = self.index + 1
+        questionVC.answers = self.answers
+        questionVC.categories = self.categories
+        questionVC.questions = self.questions
+        questionVC.descriptions = self.descriptions
+        questionVC.url = self.url
+        questionVC.score = self.score
+        questionVC.score[index] = "\(correctAll) / \(questionNum)"
+        questionVC.images = self.images
+        present(questionVC, animated: false, completion: nil)
     }
     
     fileprivate func questionBuilder() {
@@ -58,6 +79,14 @@ class FinishViewController: UIViewController {
         }
     }
     
+    fileprivate func mainBuilder() {
+        if mainVC == nil {
+            mainVC =
+                storyboard?
+                    .instantiateViewController(withIdentifier: "mainVC")
+                as! ViewController
+        }
+    }
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        switch segue.identifier! {
 //        case "QuestionSegue":
@@ -70,12 +99,21 @@ class FinishViewController: UIViewController {
 //    }
 
     @IBAction func backToList(_ sender: Any) {
+        mainBuilder()
         let transition = CATransition()
         transition.duration = 0.5
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromLeft
         view.window!.layer.add(transition, forKey: kCATransition)
-        present((storyboard?.instantiateViewController(withIdentifier: "mainVC"))!, animated: false, completion: nil)
+        mainVC.answers = self.answers
+        mainVC.categories = self.categories
+        mainVC.questions = self.questions
+        mainVC.descriptions = self.descriptions
+        mainVC.url = self.url
+        mainVC.score = score
+        mainVC.score[index] = "\(correctAll) / \(questionNum)"
+        mainVC.images = self.images
+        present(mainVC, animated: false, completion: nil)
     }
     /*
     // MARK: - Navigation
