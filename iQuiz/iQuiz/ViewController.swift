@@ -114,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadData() {
         var data = Data()
-        if !isInternetAvailable(){
+        if isInternetAvailable(){
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = dir.appendingPathComponent("data.json")
                 do {
@@ -123,7 +123,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     print("read file")
                     decodeData(data)
                 } catch {
-                    let alert = UIAlertController(title: "Something went wrong..", message: "You need to connect to Internet for the iQuiz to run successfully for the first time!", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Something went wrong..", message: "You need to connect to Internet for the iQuiz to load online data!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
