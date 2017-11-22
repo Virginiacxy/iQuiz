@@ -114,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadData() {
         var data = Data()
-        if isInternetAvailable(){
+        if !isInternetAvailable(){
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = dir.appendingPathComponent("data.json")
                 do {

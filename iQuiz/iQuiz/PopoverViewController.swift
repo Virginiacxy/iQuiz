@@ -34,18 +34,25 @@ class PopoverViewController: UIViewController {
     @IBAction func checkBtnPressed(_ sender: UIButton) {
         let mainVC: ViewController = presentingViewController as! ViewController
         NSLog(textField.text!)
-        if let url = textField.text, !url.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty && UIApplication.shared.canOpenURL(URL(string: textField.text!)!) {
-            let alert = UIAlertController(title: "Success", message: "Update successfully", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            mainVC.url = url
-            mainVC.loadData()
-            mainVC.tableView.reloadData()
+        if mainVC.isInternetAvailable() {
+            if let url = textField.text, !url.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty && UIApplication.shared.canOpenURL(URL(string: textField.text!)!) {
+                let alert = UIAlertController(title: "Success", message: "Update successfully", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                mainVC.url = url
+                mainVC.loadData()
+                mainVC.tableView.reloadData()
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Invalid URL input", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         } else {
-            let alert = UIAlertController(title: "Error", message: "Invalid URL input", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Something went wrong..", message: "You need to connect to Internet for the iQuiz to load online data!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
